@@ -1,0 +1,91 @@
+<!doctype html>
+<!-- El popup real de la extensión con datos de ejemplo (nombres inventados).
+     ?scene=live    reunión en curso
+     ?scene=history historial, sin reunión en curso -->
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../src/popup.css">
+  <script src="config.js"></script>
+  <script>
+    (() => {
+      const scene = new URLSearchParams(location.search).get("scene") || "live";
+
+      // Reloj de ejemplo a media mañana, para que los horarios se vean
+      // naturales sin importar a qué hora se generen las imágenes.
+      const fakeStart = new Date();
+      fakeStart.setHours(10, 47, 0, 0);
+      const realStart = Date.now();
+      const realNow = Date.now.bind(Date);
+      Date.now = () => fakeStart.getTime() + (realNow() - realStart);
+
+      const now = Date.now(), min = 60000, day = 24 * 60 * min;
+      const p = (startAgo, presentMin, speakSec) => ({
+        firstSeen: now - startAgo, lastSeen: now, totalMs: presentMin * min,
+        speakingMs: speakSec * 1000, intervals: [[0, 0]],
+      });
+      const meeting = (id, customTitle, start, end, participants, extra = {}) =>
+        ({ id, code: id, title: id, customTitle, start, end, participants, ...extra });
+
+      const historia = (start, end) => meeting("hqd-prtz-kmw", "Clase de Historia 3°B", start, end, {
+        "Prof. Laura Méndez": p(52 * min, 52, 1310),
+        "Valentina Ríos": p(50 * min, 50, 486),
+        "Tomás Aguirre": p(50 * min, 49, 342),
+        "Camila Herrera": p(48 * min, 47, 205),
+        "Joaquín Paz": p(45 * min, 44, 96),
+        "Martina Suárez": p(38 * min, 37, 31),
+      }, end > now - 5000 ? { speakingNow: ["Valentina Ríos"] } : {});
+
+      const equipo = meeting("wkx-bnma-tre", "Reunión de equipo semanal", now - day - 60 * min, now - day, {
+        "Lucía Fernández": p(60 * min, 60, 905),
+        "Diego Castro": p(60 * min, 58, 742),
+        "Sofía Pereyra": p(58 * min, 57, 611),
+        "Nicolás Romero": p(55 * min, 54, 280),
+        "Florencia Vega": p(40 * min, 39, 64),
+      });
+
+      const tutoria = meeting("ytn-cqsa-plo", "Tutoría – Grupo 2", now - 3 * day - 40 * min, now - 3 * day, {
+        "Prof. Laura Méndez": p(40 * min, 40, 820),
+        "Bruno Molina": p(38 * min, 38, 410),
+        "Julieta Ortiz": p(35 * min, 34, 260),
+      });
+
+      const list = scene === "history"
+        ? [equipo, historia(now - 2 * day - 55 * min, now - 2 * day), tutoria]
+        : [historia(now - 52 * min, now - 1000), equipo, tutoria];
+
+      const data = { enabled: true, meetings: Object.fromEntries(list.map((m) => [m.id, m])) };
+      window.browser = {
+        runtime: {},
+        storage: {
+          local: {
+            get: async (k) => (typeof k === "string" ? { [k]: data[k] } : data),
+            set: async (o) => Object.assign(data, o),
+          },
+          onChanged: { addListener() {} },
+        },
+      };
+    })();
+  </script>
+</head>
+<body>
+  <header class="app-header">
+    <img src="../icons/icon-32.png" alt="" width="28" height="28">
+    <div class="brand">
+      <h1 data-app-name></h1>
+      <p id="status" class="status"></p>
+    </div>
+    <label class="switch">
+      <input type="checkbox" id="enabled">
+      <span class="track"><span class="thumb"></span></span>
+    </label>
+  </header>
+  <main id="content"></main>
+  <footer class="app-footer">
+    <button id="exportAll" class="btn"></button>
+    <button id="clearAll" class="btn btn-danger"></button>
+  </footer>
+  <div id="toast" class="toast"></div>
+  <script src="../src/popup.js"></script>
+</body>
+</html>

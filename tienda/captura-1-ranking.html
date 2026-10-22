@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="config.js"></script>
+  <style>
+    .hero {
+      position: absolute;
+      left: 96px;
+      top: 0;
+      bottom: 0;
+      width: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; font-size: 22px; font-weight: 600; }
+    .brand img { width: 56px; height: 56px; border-radius: 14px; box-shadow: 0 0 0 2px rgb(255 255 255 / 35%); }
+    h1 { font-size: 52px; line-height: 1.08; margin: 30px 0 34px; letter-spacing: -0.02em; }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+    li { display: flex; align-items: center; gap: 14px; font-size: 21px; }
+    .popup-wrap {
+      position: absolute;
+      right: 110px;
+      top: 50%;
+      width: 400px;
+      height: 600px;
+      transform: translateY(-50%) scale(1.18);
+      transform-origin: center right;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="hero">
+      <div class="brand"><img src="../icons/icon-128.png" alt=""><span data-app-name></span></div>
+      <h1>Sabé quién participa y cuánto habla cada uno</h1>
+      <ul>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Asistencia automática en Google Meet</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Tiempo de habla y ranking de participación</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Indicador en vivo de quién está hablando</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Exportación a Excel y Google Sheets</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Tus datos nunca salen de tu navegador</li>
+      </ul>
+    </div>
+    <div class="popup-wrap">
+      <iframe class="popup-frame" src="mock-popup.html?scene=live" width="400" height="600"></iframe>
+    </div>
+  </div>
+</body>
+</html>

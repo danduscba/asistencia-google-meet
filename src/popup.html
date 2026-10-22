@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Asistencia para Google Meet</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="app-header">
+    <img src="../icons/icon-32.png" alt="" width="28" height="28">
+    <div class="brand">
+      <h1>Asistencia para Google Meet</h1>
+      <p id="status" class="status"></p>
+    </div>
+    <label class="switch" title="Activar o pausar el registro">
+      <input type="checkbox" id="enabled">
+      <span class="track"><span class="thumb"></span></span>
+    </label>
+  </header>
+
+  <main id="content"></main>
+
+  <footer class="app-footer">
+    <button id="exportAll" class="btn"></button>
+    <button id="clearAll" class="btn btn-danger"></button>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

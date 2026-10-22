@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="config.js"></script>
+  <style>
+    /* Ventana de navegador genérica con una videollamada de ejemplo. */
+    .window {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 160px;
+      bottom: -20px;
+      border-radius: 14px 14px 0 0;
+      background: #202124;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgb(20 10 60 / 40%);
+    }
+    .toolbar {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 16px;
+      background: #f1f3f6;
+      border-bottom: 1px solid #dfe2e8;
+    }
+    .dots { display: flex; gap: 8px; }
+    .dots span { width: 12px; height: 12px; border-radius: 50%; background: #d4d7de; }
+    .address {
+      flex: 1;
+      height: 32px;
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid #dfe2e8;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      color: #5f6368;
+      font-size: 14px;
+    }
+    .ext-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #e3e1fb;
+      box-shadow: 0 0 0 2px #6366f1;
+    }
+    .ext-icon img { width: 22px; height: 22px; }
+
+    .grid {
+      position: absolute;
+      top: 52px;
+      left: 0;
+      right: 440px;
+      bottom: 0;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .tile {
+      position: relative;
+      border-radius: 12px;
+      background: #3c4043;
+      display: grid;
+      place-items: center;
+    }
+    .tile.speaking { box-shadow: 0 0 0 4px #8ab4f8; }
+    .face {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 500;
+    }
+    .label {
+      position: absolute;
+      left: 12px;
+      bottom: 10px;
+      color: #fff;
+      font-size: 14px;
+      text-shadow: 0 1px 2px rgb(0 0 0 / 60%);
+    }
+
+    .popup-wrap { position: absolute; top: 60px; right: 22px; }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="caption">
+      <h1>Mirá en vivo quién está hablando</h1>
+      <p>Y cuánto participó cada persona durante la reunión</p>
+    </div>
+    <div class="window">
+      <div class="toolbar">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="address">meet.google.com/hqd-prtz-kmw</div>
+        <div class="ext-icon"><img src="../icons/icon-32.png" alt=""></div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="popup-wrap">
+        <iframe class="popup-frame" src="mock-popup.html?scene=live" width="400" height="560"></iframe>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Mosaicos con iniciales: mismos nombres y colores que el popup.
+    const people = ["Prof. Laura Méndez", "Valentina Ríos", "Tomás Aguirre", "Camila Herrera", "Joaquín Paz", "Martina Suárez"];
+    const color = (name) => {
+      let h = 0;
+      for (const ch of name.toLowerCase()) h = (h * 31 + ch.codePointAt(0)) >>> 0;
+      return `hsl(${h % 360} 55% 48%)`;
+    };
+    const initials = (n) => { const p = n.split(/\s+/); return (p[0][0] + p[p.length - 1][0]).toUpperCase(); };
+    document.getElementById("grid").innerHTML = people.map((n) => `
+      <div class="tile${n === "Valentina Ríos" ? " speaking" : ""}">
+        <div class="face" style="background:${color(n)}">${initials(n)}</div>
+        <div class="label">${n}</div>
+      </div>`).join("");
+  </script>
+</body>
+</html>

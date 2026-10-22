@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="config.js"></script>
+  <style>
+    .popup-wrap { position: absolute; left: 90px; top: 165px; }
+    .arrow {
+      position: absolute;
+      left: 515px;
+      top: 430px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgb(255 255 255 / 18%);
+      display: grid;
+      place-items: center;
+    }
+    .arrow svg { width: 34px; height: 34px; }
+
+    .sheet {
+      position: absolute;
+      left: 610px;
+      right: 70px;
+      top: 200px;
+      border-radius: 12px;
+      background: #fff;
+      color: #202124;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgb(20 10 60 / 35%);
+    }
+    .sheet-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #f1f3f6;
+      border-bottom: 1px solid #dfe2e8;
+      font-size: 14px;
+      color: #3c4043;
+    }
+    .file-icon {
+      width: 24px;
+      height: 28px;
+      border-radius: 3px;
+      background: #1e8e3e;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+    th, td { border: 1px solid #e3e5ea; padding: 9px 10px; text-align: left; white-space: nowrap; }
+    th { background: #f8f9fb; font-weight: 600; color: #3c4043; }
+    td.num, th.num { text-align: right; }
+    .rowhead { width: 34px; text-align: center; color: #80868b; background: #f8f9fb; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="caption">
+      <h1>Historial y exportación con un clic</h1>
+      <p>Descargá la asistencia en CSV y abrila en Excel o Google Sheets</p>
+    </div>
+
+    <div class="popup-wrap">
+      <iframe class="popup-frame" src="mock-popup.html?scene=history" width="400" height="590"></iframe>
+    </div>
+
+    <div class="arrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+    </div>
+
+    <div class="sheet">
+      <div class="sheet-bar"><span class="file-icon">CSV</span>asistencia_wkx-bnma-tre.csv</div>
+      <table>
+        <thead>
+          <tr><th class="rowhead"></th><th>Puesto</th><th>Nombre</th><th class="num">Tiempo hablando</th><th class="num">% de habla</th><th class="num">Min. presente</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    // Mismos datos que la reunión "Reunión de equipo semanal" del popup.
+    const rows = [
+      ["Lucía Fernández", 905, 60], ["Diego Castro", 742, 58], ["Sofía Pereyra", 611, 57],
+      ["Nicolás Romero", 280, 54], ["Florencia Vega", 64, 39],
+    ];
+    const total = rows.reduce((s, r) => s + r[1], 0);
+    const clock = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+    document.getElementById("rows").innerHTML = rows.map(([n, s, m], i) => `
+      <tr><td class="rowhead">${i + 2}</td><td>${i + 1}</td><td>${n}</td>
+      <td class="num">${clock(s)}</td><td class="num">${Math.round(100 * s / total)}%</td><td class="num">${m}</td></tr>`).join("");
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+/* Estilos compartidos por las imágenes de la tienda. */
+:root {
+  --from: #6366f1;
+  --to: #7c3aed;
+  --ink: #1f2330;
+  --muted: #6b7183;
+  --live: #16a34a;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  overflow: hidden;
+  font-family: "Segoe UI", system-ui, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.canvas {
+  position: relative;
+  width: 1280px;
+  height: 800px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 85% 15%, rgb(255 255 255 / 14%), transparent 40%),
+    radial-gradient(circle at 10% 95%, rgb(255 255 255 / 10%), transparent 45%),
+    linear-gradient(135deg, var(--from), var(--to));
+  color: #fff;
+}
+
+.caption {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.caption h1 { margin: 0; font-size: 40px; font-weight: 700; letter-spacing: -0.01em; }
+.caption p { margin: 8px 0 0; font-size: 19px; opacity: 0.85; }
+
+/* Popup real, en un iframe con sombra. */
+.popup-frame {
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 30px 60px rgb(20 10 60 / 35%), 0 8px 20px rgb(20 10 60 / 20%);
+  display: block;
+}
+
+.check {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 18%);
+  flex: none;
+}
+.check svg { width: 16px; height: 16px; }
