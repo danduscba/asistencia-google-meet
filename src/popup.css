@@ -321,6 +321,9 @@ main {
 
 /* ---- Pie ---- */
 
+.export-all { display: flex; align-items: center; gap: 6px; }
+.export-all span { font-size: 11px; color: var(--muted); }
+
 .app-footer {
   display: flex;
   justify-content: space-between;

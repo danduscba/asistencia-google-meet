@@ -54,7 +54,7 @@ Genera `dist/asistencia-google-meet-<versión>.zip` solo con los archivos necesa
 ## 4. Material para la ficha de la tienda
 
 **Descripción breve** (hasta 132 caracteres, igual a la del manifest):
-> Registra quién participa en tus reuniones de Google Meet y cuánto habla cada persona. Exporta la asistencia a CSV.
+> Registra quién participa en tus reuniones de Google Meet y cuánto habla cada persona. Exporta la asistencia a Excel o Google Sheets.
 
 **Descripción completa:**
 > Asistencia para Google Meet registra automáticamente quién participa en tus reuniones de Google Meet y cuánto habla cada persona.
@@ -63,7 +63,7 @@ Genera `dist/asistencia-google-meet-<versión>.zip` solo con los archivos necesa
 > ✔ Tiempo de habla de cada participante y ranking de quién habló más.
 > ✔ Indicador en vivo de quién está hablando.
 > ✔ Historial de reuniones, que podés renombrar.
-> ✔ Exportación a CSV, compatible con Excel y Google Sheets.
+> ✔ Descarga en Excel o apertura directa en Google Sheets.
 > ✔ Copiar la lista de nombres con un clic.
 >
 > Ideal para docentes que toman asistencia, equipos que quieren reuniones más equilibradas y moderadores.

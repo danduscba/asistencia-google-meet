@@ -31,7 +31,7 @@ El usuario puede, en cualquier momento:
 
 - pausar el registro con el interruptor del popup;
 - eliminar una reunión o borrar todo el historial;
-- exportar sus datos a un archivo CSV;
+- exportar sus datos a un archivo de Excel, o copiarlos y abrir una hoja nueva de Google Sheets para pegarlos (la extensión no se conecta con la cuenta de Google: los datos solo llegan a Sheets si el usuario los pega);
 - desinstalar la extensión, lo que borra todos los datos guardados.
 
 ## Responsabilidad del usuario
